@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camilo Andrés Bastos · Portafolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --bg2: #181818;
+      --bg3: #222;
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.14);
+      --text: #f0ede8;
+      --text2: #a09c96;
+      --text3: #5a5754;
+      --accent: #c9b99a;
+      --accent2: #8a7a65;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text2);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name span { color: var(--accent); }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0f0f0f;
+    }
+
+    .btn-primary:hover { background: #d4c7ae; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text2);
+      border: 0.5px solid var(--border2);
+    }
+
+    .btn-secondary:hover { color: var(--text); border-color: var(--accent2); }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    /* SOBRE MÍ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .about-text {
+      grid-column: 1 / -1;
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.8;
+    }
+
+    .about-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .about-card .val {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--accent);
+    }
+
+    .about-card .lbl {
+      font-size: 13px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    /* STACK */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stack-cat {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .stack-cat-title {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      padding: 5px 12px;
+      background: var(--bg3);
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    /* PROYECTOS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--accent2); }
+
+    .proj-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .proj-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--bg3);
+      border: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .proj-year {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    .proj-name {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .proj-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    /* CONTACTO */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-width: 520px;
+    }
+
+    .contact-item {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-item:hover { border-color: var(--accent2); }
+
+    .c-lbl {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .c-val {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 0.5px solid var(--border);
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label { animation: fadeUp 0.6s ease both; }
+    .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      section { padding: 3.5rem 1.25rem; }
+      .about-grid, .stack-grid, .projects-grid, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Camilo Bastos</div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-label">Ingeniería de Sistemas · Cúcuta, Colombia</div>
+    <h1 class="hero-name">Camilo<br>Andrés <span>Bastos.</span></h1>
+    <p class="hero-desc">Estudiante de ingeniería de sistemas apasionado por la tecnología y el desarrollo de software. Construyendo mis habilidades desde cero, un proyecto a la vez.</p>
+    <div class="hero-cta">
+      <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+      <a href="#contacto" class="btn btn-secondary">Contactarme</a>
+    </div>
+  </div>
+
+  <section id="sobre">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Sobre mí</h2>
+    </div>
+    <p class="about-text">Soy estudiante de Ingeniería de Sistemas con interés genuino en cómo funciona la tecnología desde adentro. Estoy aprendiendo los fundamentos de la programación y las buenas prácticas del desarrollo de software, con la meta de crear soluciones que resuelvan problemas reales. Me considero autodidacta, curioso y comprometido con seguir creciendo.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="val">2025</div>
+        <div class="lbl">Inicio de carrera universitaria</div>
+      </div>
+      <div class="about-card">
+        <div class="val">Activo</div>
+        <div class="lbl">Disponible para proyectos y colaboraciones</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Habilidades y stack</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-cat">
+        <div class="stack-cat-title">Lenguajes</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">C++</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-title">Herramientas</div>
+        <div class="tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">VS Code</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-title">Conceptos</div>
+        <div class="tags">
+          <span class="tag">Algoritmos</span>
+          <span class="tag">POO</span>
+          <span class="tag">Bases de datos</span>
+          <span class="tag">Redes</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-title">Aprendiendo</div>
+        <div class="tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Proyectos</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="proj-top">
+          <div class="proj-icon">📄</div>
+          <span class="proj-year">2025</span>
+        </div>
+        <div class="proj-name">Proyecto académico 1</div>
+        <div class="proj-desc">Descripción de tu proyecto. ¿Qué hace? ¿Qué problema resuelve? Reemplaza este texto con tu info real.</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Algoritmos</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="proj-top">
+          <div class="proj-icon">💻</div>
+          <span class="proj-year">En progreso</span>
+        </div>
+        <div class="proj-name">Próximo proyecto</div>
+        <div class="proj-desc">Los portafolios crecen con la carrera. Agrega aquí tu siguiente proyecto cuando lo tengas listo.</div>
+        <div class="tags">
+          <span class="tag">Por definir</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contacto</h2>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:tu@email.com" class="contact-item">
+        <span class="c-lbl">Email</span>
+        <span class="c-val">tu@email.com</span>
+      </a>
+      <a href="https://github.com/Camil0Melgarejo" target="_blank" class="contact-item">
+        <span class="c-lbl">GitHub</span>
+        <span class="c-val">Camil0Melgarejo</span>
+      </a>
+      <a href="https://linkedin.com/in/camilo" target="_blank" class="contact-item">
+        <span class="c-lbl">LinkedIn</span>
+        <span class="c-val">linkedin.com/in/camilo</span>
+      </a>
+      <div class="contact-item">
+        <span class="c-lbl">Ciudad</span>
+        <span class="c-val">Cúcuta, Colombia</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Camilo Andrés Bastos Melgarejo · 2025
+  </footer>
+
+</body>
+</html>
