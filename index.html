@@ -56,6 +56,7 @@
     .proj-name { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
     .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 1rem; }
     .proj-link { font-size: 12px; color: var(--accent); letter-spacing: 0.05em; margin-top: 12px; display: block; }
+    .proj-badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 6px; background: rgba(201,185,154,0.1); border: 0.5px solid rgba(201,185,154,0.3); color: var(--accent); margin-bottom: 10px; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 520px; }
     .contact-item { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; text-decoration: none; transition: border-color 0.2s; }
     .contact-item:hover { border-color: var(--accent2); }
@@ -98,7 +99,6 @@
 
   <section id="sobre">
     <div class="section-header">
-      <span class="section-num">01</span>
       <h2 class="section-title">Sobre mí</h2>
     </div>
     <p class="about-text">Estudiante de Ingeniería de Sistemas con enfoque en el desarrollo de software. Mi pasión radica en comprender la arquitectura tecnológica y aplicar buenas prácticas para construir soluciones eficientes y escalables. Me considero un desarrollador en formación continua, con una mentalidad autodidacta y orientada a la resolución de problemas reales mediante el código. Comprometido con la excelencia técnica y el crecimiento profesional.</p>
@@ -116,7 +116,6 @@
 
   <section id="stack">
     <div class="section-header">
-      <span class="section-num">02</span>
       <h2 class="section-title">Habilidades y stack</h2>
     </div>
     <div class="stack-grid">
@@ -142,7 +141,7 @@
         <div class="stack-cat-title">Conceptos</div>
         <div class="tags">
           <span class="tag">Algoritmos y lógica</span>
-          <span class="tag">Estrucutras de control</span>
+          <span class="tag">Estructuras de control</span>
           <span class="tag">Gestión de proyectos</span>
           <span class="tag">Pensamiento computacional</span>
         </div>
@@ -161,17 +160,18 @@
 
   <section id="proyectos">
     <div class="section-header">
-      <span class="section-num">03</span>
       <h2 class="section-title">Proyectos</h2>
     </div>
     <div class="projects-grid">
+
       <a class="project-card" href="https://github.com/Camil0Melgarejo/cpp-semester1" target="_blank">
         <div class="proj-top">
           <div class="proj-icon">💻</div>
           <span class="proj-year">2025</span>
         </div>
+        <span class="proj-badge">Universidad</span>
         <div class="proj-name">Ejercicios C++ — Semestre 1</div>
-        <div class="proj-desc">Desarrollo de una suite de herramientas algorítmicas diseñadas para la resolución de problemas lógicos y matemáticos. Este repositorio documenta la implementación de estructuras de control, manejo de variables y optimización de procesos aritméticos, consolidando las bases de la ingeniería de software mediante el lenguaje C++.</div>
+        <div class="proj-desc">Suite de herramientas algorítmicas para la resolución de problemas lógicos y matemáticos. Incluye cálculo de triángulo rectángulo, peso recomendado y desglose de monedas en céntimos.</div>
         <div class="tags">
           <span class="tag">C++</span>
           <span class="tag">Algoritmos</span>
@@ -179,27 +179,45 @@
         </div>
         <span class="proj-link">Ver en GitHub →</span>
       </a>
+
+      <a class="project-card" href="https://github.com/Camil0Melgarejo/cpp-self-learning" target="_blank">
+        <div class="proj-top">
+          <div class="proj-icon">🧠</div>
+          <span class="proj-year">Ongoing</span>
+        </div>
+        <span class="proj-badge">Aprendizaje autónomo</span>
+        <div class="proj-name">Self-Learning </div>
+        <div class="proj-desc"> Espacio dedicado al desarrollo de soluciones de software impulsadas por la investigación independiente. Este repositorio agrupa proyectos diseñados y ejecutados de forma proactiva, demostrando la capacidad de identificar problemas técnicos y resolverlos mediante el aprendizaje autodidacta de nuevas herramientas y arquitecturas.</div>
+        <div class="tags">
+          <span class="tag">Software Development</span>
+          <span class="tag">Lógica</span>
+          <span class="tag">Autónomo</span>
+        </div>
+        <span class="proj-link">Ver en GitHub →</span>
+      </a>
+
       <div class="project-card">
         <div class="proj-top">
           <div class="proj-icon">🚀</div>
           <span class="proj-year">En progreso</span>
         </div>
-        <div class="proj-name">Próximo proyecto</div>
-        <div class="proj-desc">Actualmente cursando la certificación de Harvard University. Este repositorio albergará la resolución de problemas (Problem Sets) enfocados en memoria, estructuras de datos y algoritmos en C y Python, demostrando el compromiso con estándares académicos internacionales.</div>
+        <span class="proj-badge">Próximamente</span>
+        <div class="proj-name">CS50 — Harvard University</div>
+        <div class="proj-desc">Actualmente cursando la certificación de Harvard University. Este repositorio albergará la resolución de problemas enfocados en memoria, estructuras de datos y algoritmos en C y Python.</div>
         <div class="tags">
           <span class="tag">Computer Science</span>
         </div>
       </div>
+
     </div>
   </section>
 
   <section id="contacto">
     <div class="section-header">
-      <span class="section-num">04</span>
       <h2 class="section-title">Contacto</h2>
     </div>
     <div class="contact-grid">
-      <a href="mailto:tu@email.com" class="contact-item">
+      <a href="mailto:melgarejocamilo08@gmail.com" class="contact-item">
         <span class="c-lbl">Email</span>
         <span class="c-val">melgarejocamilo08@gmail.com</span>
       </a>
@@ -209,7 +227,7 @@
       </a>
       <a href="https://www.linkedin.com/in/camilobastos080906" target="_blank" class="contact-item">
         <span class="c-lbl">LinkedIn</span>
-        <span class="c-val">www.linkedin.com/in/camilobastos080906</span>
+        <span class="c-val">linkedin.com/in/camilobastos080906</span>
       </a>
       <div class="contact-item">
         <span class="c-lbl">Ciudad</span>
