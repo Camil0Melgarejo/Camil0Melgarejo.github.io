@@ -50,6 +50,8 @@
     .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .project-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.2s; text-decoration: none; display: block; color: inherit; }
     .project-card:hover { border-color: var(--accent2); }
+    .project-card.clickable { cursor: pointer; }
+    .project-card.clickable:hover { border-color: var(--accent); }
     .proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
     .proj-icon { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; }
     .proj-year { font-size: 12px; color: var(--text3); }
@@ -57,8 +59,47 @@
     .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 1rem; }
     .proj-link { font-size: 12px; color: var(--accent); letter-spacing: 0.05em; margin-top: 12px; display: block; }
     .proj-badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 6px; background: rgba(201,185,154,0.1); border: 0.5px solid rgba(201,185,154,0.3); color: var(--accent); margin-bottom: 10px; }
+    .proj-hint { font-size: 11px; color: var(--text3); margin-top: 14px; display: flex; align-items: center; gap: 5px; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--bg2); border: 0.5px solid var(--border2);
+      border-radius: 16px; width: 100%; max-width: 620px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 2.5rem;
+      transform: translateY(18px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.75rem; }
+    .modal-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--bg3); border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .modal-close { background: var(--bg3); border: 0.5px solid var(--border); color: var(--text2); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: color 0.2s, border-color 0.2s; }
+    .modal-close:hover { color: var(--text); border-color: var(--accent2); }
+    .modal-badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 6px; background: rgba(201,185,154,0.1); border: 0.5px solid rgba(201,185,154,0.3); color: var(--accent); margin-bottom: 10px; }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+    .modal-subtitle { font-size: 13px; color: var(--text3); margin-bottom: 1.5rem; }
+    .modal-desc { font-size: 14px; color: var(--text2); line-height: 1.8; margin-bottom: 1.75rem; }
+    .modal-section-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; font-weight: 500; }
+    .modal-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .modal-stack-item { background: var(--bg3); border: 0.5px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; }
+    .modal-stack-item .s-layer { font-size: 11px; color: var(--text3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .modal-stack-item .s-tech { font-size: 13px; color: var(--text); font-weight: 500; }
+    .modal-stack-item .s-note { font-size: 11px; color: var(--text3); margin-top: 2px; }
+    .modal-status { display: flex; align-items: center; gap: 10px; background: var(--bg3); border: 0.5px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #c9b99a; box-shadow: 0 0 0 3px rgba(201,185,154,0.2); flex-shrink: 0; }
+    .status-text { font-size: 13px; color: var(--text2); }
+
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 520px; }
-    .contact-item { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; text-decoration: none; transition: border-color 0.2s; }
+    .contact-item { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; text-decoration: none; transition: border-color 0.2s; display: block; }
     .contact-item:hover { border-color: var(--accent2); }
     .c-lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); font-weight: 500; display: block; margin-bottom: 4px; }
     .c-val { font-size: 14px; color: var(--text); }
@@ -72,6 +113,8 @@
       nav { padding: 1rem 1.25rem; } .nav-links { gap: 1rem; }
       .hero { padding: 7rem 1.25rem 3rem; } section { padding: 3.5rem 1.25rem; }
       .about-grid, .stack-grid, .projects-grid, .contact-grid { grid-template-columns: 1fr; }
+      .modal { padding: 1.5rem; }
+      .modal-stack { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -124,35 +167,39 @@
         <div class="tags">
           <span class="tag">C++</span>
           <span class="tag">Python</span>
+          <span class="tag">Dart</span>
+          <span class="tag">TypeScript</span>
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
         </div>
       </div>
       <div class="stack-cat">
-        <div class="stack-cat-title">Herramientas</div>
+        <div class="stack-cat-title">Frameworks & Plataformas</div>
         <div class="tags">
-          <span class="tag">Dev-C++</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">NestJS</span>
+          <span class="tag">Firebase</span>
           <span class="tag">Git</span>
           <span class="tag">GitHub</span>
-          <span class="tag">VS Code</span>
+        </div>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-title">Infraestructura & Cloud</div>
+        <div class="tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">AWS S3</span>
+          <span class="tag">Railway</span>
+          <span class="tag">Auth0</span>
+          <span class="tag">GitHub Actions</span>
         </div>
       </div>
       <div class="stack-cat">
         <div class="stack-cat-title">Conceptos</div>
         <div class="tags">
           <span class="tag">Algoritmos y lógica</span>
-          <span class="tag">Estructuras de control</span>
+          <span class="tag">Arquitectura modular</span>
           <span class="tag">Gestión de proyectos</span>
           <span class="tag">Pensamiento computacional</span>
-        </div>
-      </div>
-      <div class="stack-cat">
-        <div class="stack-cat-title">Aprendiendo</div>
-        <div class="tags">
-          <span class="tag">JavaScript</span>
-          <span class="tag">Java</span>
-          <span class="tag">SQL</span>
-          <span class="tag">POO</span>
         </div>
       </div>
     </div>
@@ -186,8 +233,8 @@
           <span class="proj-year">Ongoing</span>
         </div>
         <span class="proj-badge">Aprendizaje autónomo</span>
-        <div class="proj-name">Self-Learning </div>
-        <div class="proj-desc"> Espacio dedicado al desarrollo de soluciones de software impulsadas por la investigación independiente. Este repositorio agrupa proyectos diseñados y ejecutados de forma proactiva, demostrando la capacidad de identificar problemas técnicos y resolverlos mediante el aprendizaje autodidacta de nuevas herramientas y arquitecturas.</div>
+        <div class="proj-name">Self-Learning</div>
+        <div class="proj-desc">Espacio dedicado al desarrollo de soluciones de software impulsadas por la investigación independiente. Proyectos diseñados y ejecutados de forma proactiva, demostrando la capacidad de identificar problemas técnicos y resolverlos de manera autodidacta.</div>
         <div class="tags">
           <span class="tag">Software Development</span>
           <span class="tag">Lógica</span>
@@ -207,6 +254,24 @@
         <div class="tags">
           <span class="tag">Computer Science</span>
         </div>
+      </div>
+
+      <!-- RepCampus card -->
+      <div class="project-card clickable" onclick="openModal()">
+        <div class="proj-top">
+          <div class="proj-icon">🏛️</div>
+          <span class="proj-year">2025</span>
+        </div>
+        <span class="proj-badge">Proyecto universitario</span>
+        <div class="proj-name">RepCampus</div>
+        <div class="proj-desc">Aplicación móvil para la gestión y reporte de daños en campus universitarios. Frontend completado con stack de nivel enterprise.</div>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">NestJS</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">AWS</span>
+        </div>
+        <span class="proj-hint">✦ Ver más detalles</span>
       </div>
 
     </div>
@@ -239,6 +304,86 @@
   <footer>
     Camilo Andrés Bastos Melgarejo · 2025
   </footer>
+
+  <!-- ── MODAL RepCampus ── -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal">
+      <div class="modal-top">
+        <div class="modal-icon">🏛️</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <span class="modal-badge">Proyecto universitario · 2025</span>
+      <div class="modal-title">RepCampus</div>
+      <div class="modal-subtitle">Aplicación móvil de gestión de reportes para campus universitarios</div>
+      <p class="modal-desc">
+        RepCampus es una aplicación móvil diseñada para facilitar el reporte y seguimiento de daños o incidencias dentro de un campus universitario. Los estudiantes y personal pueden registrar reportes con fotos, ubicación y descripción, mientras que los administradores gestionan y resuelven cada caso desde un panel centralizado. El proyecto está siendo desarrollado con un stack de nivel enterprise, con miras a escalar a múltiples instituciones.
+      </p>
+
+      <div class="modal-section-title">Stack tecnológico</div>
+      <div class="modal-stack">
+        <div class="modal-stack-item">
+          <div class="s-layer">App móvil</div>
+          <div class="s-tech">Flutter · Dart</div>
+          <div class="s-note">iOS & Android desde una sola base de código</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Backend / API</div>
+          <div class="s-tech">NestJS · TypeScript</div>
+          <div class="s-note">Arquitectura modular enterprise</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Base de datos</div>
+          <div class="s-tech">PostgreSQL</div>
+          <div class="s-note">Neon · AWS RDS</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Autenticación</div>
+          <div class="s-tech">Auth0 / Clerk</div>
+          <div class="s-note">Identidad estándar de la industria</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Almacenamiento</div>
+          <div class="s-tech">AWS S3 · Cloudflare R2</div>
+          <div class="s-note">Fotos de reportes en la nube</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Notificaciones</div>
+          <div class="s-tech">Firebase Cloud Messaging</div>
+          <div class="s-note">Push notifications en tiempo real</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Despliegue</div>
+          <div class="s-tech">Railway · AWS ECS</div>
+          <div class="s-note">CI/CD con GitHub Actions</div>
+        </div>
+        <div class="modal-stack-item">
+          <div class="s-layer">Objetivo</div>
+          <div class="s-tech">App Store · Play Store</div>
+          <div class="s-note">Distribución pública planificada</div>
+        </div>
+      </div>
+
+      <div class="modal-status">
+        <div class="status-dot"></div>
+        <span class="status-text">Frontend completado · Backend en desarrollo activo · Código privado</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
 
 </body>
 </html>
